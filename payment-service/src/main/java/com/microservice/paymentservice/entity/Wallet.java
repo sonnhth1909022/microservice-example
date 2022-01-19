@@ -15,10 +15,11 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "wallets")
-public class Wallet extends BaseEntity{
+public class Wallet {
     @Id
     @Column(name = "id", nullable = false)
     private Long userId;
     private double balance;
     private String name;
+
 }

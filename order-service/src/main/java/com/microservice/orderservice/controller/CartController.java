@@ -2,8 +2,8 @@ package com.microservice.orderservice.controller;
 
 import com.microservice.orderservice.entity.Cart;
 import com.microservice.orderservice.entity.Product;
-import com.microservice.orderservice.repo.ProductRepo;
 import com.microservice.orderservice.response.RESTResponse;
+import com.microservice.orderservice.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,14 +21,12 @@ public class CartController {
     public static HashMap<Long, Cart> cartHashMap = new HashMap<>();
 
     @Autowired
-    ProductRepo productRepo;
+    private ProductService productService;
 
-
-    //Add 1 item to cart
     @RequestMapping(method = RequestMethod.POST, path = "add")
     public ResponseEntity addToCart(@RequestParam(name = "id") int id) {
         Cart cartItem = new Cart();
-        Product product = productRepo.findById((long)id).orElse(null);
+        Product product = productService.findProductById((long)id).orElse(null);
         if (product == null){
             return new ResponseEntity<>(new RESTResponse.SimpleError()
                     .build(), HttpStatus.OK);
@@ -49,7 +47,6 @@ public class CartController {
     }
 
 
-    //delete Cart
     @RequestMapping(method = RequestMethod.DELETE, path = "clear")
     public ResponseEntity clear() {
         cartHashMap.clear();
@@ -57,8 +54,6 @@ public class CartController {
                 .build(), HttpStatus.OK);
     }
 
-
-    //Get all items in Cart (Cart Detail)
     @RequestMapping(method = RequestMethod.GET, path = "detail")
     public ResponseEntity get() {
         return new ResponseEntity<>(new RESTResponse.Success()
@@ -66,13 +61,11 @@ public class CartController {
                 .build(), HttpStatus.OK);
     }
 
-
-    //Update cart
     @RequestMapping(method = RequestMethod.PUT, path = "update")
     public ResponseEntity update(@RequestParam(name = "productId") int productId,
                                  @RequestParam(name = "quantity") int quantity
     ) {
-        Product product = productRepo.findById((long) productId).orElse(null);
+        Product product = productService.findProductById((long) productId).orElse(null);
 
         Cart cart = cartHashMap.get(Long.valueOf(productId));
         if (cart == null || product == null || quantity < 1) {
@@ -84,6 +77,5 @@ public class CartController {
                 .addData(cartHashMap)
                 .build(), HttpStatus.OK);
     }
-
 
 }

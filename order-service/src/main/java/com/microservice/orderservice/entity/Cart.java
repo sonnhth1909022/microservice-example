@@ -3,6 +3,8 @@ package com.microservice.orderservice.entity;
 
 import lombok.*;
 
+import java.math.BigDecimal;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -14,6 +16,6 @@ public class Cart {
     private String name;
     private int quantity;
     private String thumbnail;
-    private double unitPrice;
+    private BigDecimal unitPrice;
 
 }

@@ -4,5 +4,5 @@ import com.microservice.paymentservice.entity.Wallet;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface WalletRepo extends JpaRepository<Wallet, Long> {
-    Wallet findBalletByUserId(Long id);
+    Wallet findWalletByUserId(Long id);
 }

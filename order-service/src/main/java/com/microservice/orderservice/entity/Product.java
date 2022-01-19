@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
@@ -23,7 +24,7 @@ public class Product{
     @Column(name = "name")
     private String name;
 
-    private Integer price;
+    private BigDecimal price;
 
     @Column(columnDefinition = "TEXT")
     private String description;
@@ -34,11 +35,7 @@ public class Product{
     @Column(columnDefinition = "TEXT")
     private String thumbnail;
 
-
     private Integer status;
-
-    @Column(name = "is_removed")
-    private int isRemoved;
 
     @Column(name = "created_at")
     private LocalDate createdAt;

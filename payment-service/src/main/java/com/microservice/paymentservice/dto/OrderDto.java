@@ -11,6 +11,7 @@ public class OrderDto {
 
     private Long orderId;
     private Long userId;
+//    private HashMap<Long, Integer> productAndQuantity;
     private double totalPrice;
     private String paymentStatus;
     private String orderStatus;
